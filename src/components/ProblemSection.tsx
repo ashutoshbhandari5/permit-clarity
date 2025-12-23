@@ -1,4 +1,5 @@
 import { Clock, FileX, DollarSign, AlertCircle, TrendingDown } from "lucide-react";
+import AnimatedSection from "@/components/AnimatedSection";
 
 const ProblemSection = () => {
   const stats = [
@@ -41,18 +42,20 @@ const ProblemSection = () => {
       
       <div className="relative container-wide">
         {/* Stats row */}
-        <div className="grid sm:grid-cols-3 gap-6 mb-16 opacity-0 animate-fade-up">
+        <div className="grid sm:grid-cols-3 gap-6 mb-16">
           {stats.map((stat, index) => (
-            <div key={index} className="text-center p-6 rounded-2xl bg-white/5 border border-white/10">
-              <div className="font-display text-4xl sm:text-5xl font-bold text-gradient-accent mb-2">
-                {stat.value}{stat.suffix}
+            <AnimatedSection key={index} delay={index * 100}>
+              <div className="text-center p-6 rounded-2xl bg-white/5 border border-white/10">
+                <div className="font-display text-4xl sm:text-5xl font-bold text-gradient-accent mb-2">
+                  {stat.value}{stat.suffix}
+                </div>
+                <div className="text-white/60 text-sm">{stat.label}</div>
               </div>
-              <div className="text-white/60 text-sm">{stat.label}</div>
-            </div>
+            </AnimatedSection>
           ))}
         </div>
 
-        <div className="text-center mb-12 opacity-0 animate-fade-up stagger-1">
+        <AnimatedSection className="text-center mb-12">
           <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-error/10 border border-error/20 text-error font-semibold text-sm uppercase tracking-wider mb-4">
             <TrendingDown className="h-4 w-4" />
             The Problem
@@ -63,24 +66,23 @@ const ProblemSection = () => {
           <p className="text-white/60 text-lg max-w-2xl mx-auto">
             The traditional permit process is slow, opaque, and punishes small mistakes with massive delays.
           </p>
-        </div>
+        </AnimatedSection>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {problems.map((problem, index) => (
-            <div 
-              key={problem.title} 
-              className={`group p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-error/30 hover:bg-error/5 transition-all duration-300 opacity-0 animate-fade-up stagger-${index + 2}`}
-            >
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-error/20 to-orange-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <problem.icon className="h-6 w-6 text-error" />
+            <AnimatedSection key={problem.title} delay={index * 100}>
+              <div className="group p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-error/30 hover:bg-error/5 transition-all duration-300 h-full">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-error/20 to-orange-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <problem.icon className="h-6 w-6 text-error" />
+                </div>
+                <h3 className="font-display text-lg font-semibold text-white mb-2">
+                  {problem.title}
+                </h3>
+                <p className="text-white/50 text-sm leading-relaxed">
+                  {problem.description}
+                </p>
               </div>
-              <h3 className="font-display text-lg font-semibold text-white mb-2">
-                {problem.title}
-              </h3>
-              <p className="text-white/50 text-sm leading-relaxed">
-                {problem.description}
-              </p>
-            </div>
+            </AnimatedSection>
           ))}
         </div>
       </div>

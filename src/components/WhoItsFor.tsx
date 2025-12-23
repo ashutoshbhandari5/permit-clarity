@@ -1,4 +1,5 @@
 import { Pencil, Building2, HardHat, FileSearch } from "lucide-react";
+import AnimatedSection from "@/components/AnimatedSection";
 
 const WhoItsFor = () => {
   const personas = [
@@ -38,29 +39,28 @@ const WhoItsFor = () => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px]" />
       
       <div className="relative container-wide">
-        <div className="text-center mb-12 opacity-0 animate-fade-up">
+        <AnimatedSection className="text-center mb-12">
           <span className="text-primary font-semibold text-sm uppercase tracking-wider">Who It's For</span>
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white mt-3 mb-4">
             Built for Building Professionals
           </h2>
-        </div>
+        </AnimatedSection>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {personas.map((persona, index) => (
-            <div 
-              key={persona.title} 
-              className={`group text-center p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 hover:bg-white/10 transition-all duration-300 opacity-0 animate-fade-up stagger-${index + 1}`}
-            >
-              <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br ${persona.gradient} mb-5 group-hover:scale-110 transition-transform shadow-lg`}>
-                <persona.icon className="h-8 w-8 text-white" />
+            <AnimatedSection key={persona.title} delay={index * 100} animation="scale">
+              <div className="group text-center p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 hover:bg-white/10 transition-all duration-300 h-full">
+                <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br ${persona.gradient} mb-5 group-hover:scale-110 transition-transform shadow-lg`}>
+                  <persona.icon className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="font-display text-xl font-semibold text-white mb-2">
+                  {persona.title}
+                </h3>
+                <p className="text-white/50 text-sm leading-relaxed">
+                  {persona.description}
+                </p>
               </div>
-              <h3 className="font-display text-xl font-semibold text-white mb-2">
-                {persona.title}
-              </h3>
-              <p className="text-white/50 text-sm leading-relaxed">
-                {persona.description}
-              </p>
-            </div>
+            </AnimatedSection>
           ))}
         </div>
       </div>
