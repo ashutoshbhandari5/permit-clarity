@@ -11,8 +11,6 @@ import FAQSection from "@/components/FAQSection";
 import TrustSection from "@/components/TrustSection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
-import FloatingDemoButton from "@/components/FloatingDemoButton";
-
 const Index = () => {
   return (
     <main className="min-h-screen">
@@ -31,7 +29,6 @@ const Index = () => {
       <TrustSection />
       <CTASection />
       <Footer />
-      <FloatingDemoButton />
     </main>
   );
 };
