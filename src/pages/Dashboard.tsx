@@ -4,11 +4,9 @@ import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import StatsCard from "@/components/dashboard/StatsCard";
 import AttentionPanel from "@/components/dashboard/AttentionPanel";
 import ProjectsTable from "@/components/dashboard/ProjectsTable";
-import OnboardingModal from "@/components/dashboard/OnboardingModal";
 import NewProjectSheet from "@/components/dashboard/NewProjectSheet";
 
 const Dashboard = () => {
-  const [showOnboarding, setShowOnboarding] = useState(true);
   const [showNewProject, setShowNewProject] = useState(false);
 
   return (
@@ -67,7 +65,6 @@ const Dashboard = () => {
       </main>
 
       {/* Modals */}
-      <OnboardingModal open={showOnboarding} onOpenChange={setShowOnboarding} />
       <NewProjectSheet open={showNewProject} onOpenChange={setShowNewProject} />
     </div>
   );
