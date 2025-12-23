@@ -208,55 +208,49 @@ const PermitShowcase = () => {
                     })}
                   </div>
 
-                  {/* Status Stamp - Animated transition */}
-                  <div className="relative h-20 flex items-center justify-center">
+                  {/* Status Stamp - Clean animated transition */}
+                  <div className="relative h-16 flex items-center justify-center mt-2">
                     {/* REJECTED stamp */}
                     <div 
-                      className={cn(
-                        "absolute flex items-center gap-3 px-6 py-3 rounded-xl border-3 transition-all duration-500",
-                        "border-error text-error bg-error/5"
-                      )}
+                      className="absolute inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-error/10 border-2 border-error/40"
                       style={{
-                        opacity: phase3 > 0.3 ? 0 : phase2 > 0.5 ? 1 : 0.3,
-                        transform: `scale(${phase3 > 0.3 ? 0.8 : 1}) rotate(-3deg)`,
-                        transition: 'all 0.5s ease-out',
+                        opacity: phase3 > 0.3 ? 0 : phase2 > 0.5 ? 1 : 0.4,
+                        transform: `scale(${phase3 > 0.3 ? 0.9 : 1})`,
+                        transition: 'all 0.4s ease-out',
                       }}
                     >
-                      <XCircle className="h-6 w-6" />
-                      <span className="font-display font-bold text-xl uppercase tracking-wider">
+                      <XCircle className="h-5 w-5 text-error" />
+                      <span className="font-display font-bold text-lg text-error uppercase tracking-wide">
                         Rejected
                       </span>
                     </div>
 
                     {/* Processing indicator */}
                     <div 
-                      className="absolute flex items-center gap-3 px-6 py-3 rounded-xl border-2 border-accent text-accent bg-accent/5"
+                      className="absolute inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-accent/10 border-2 border-accent/40"
                       style={{
                         opacity: phase3 > 0 && phase3 < 0.7 ? 1 : 0,
-                        transform: `scale(${phase3 > 0 && phase3 < 0.7 ? 1 : 0.8})`,
-                        transition: 'all 0.4s ease-out',
+                        transform: `scale(${phase3 > 0 && phase3 < 0.7 ? 1 : 0.9})`,
+                        transition: 'all 0.3s ease-out',
                       }}
                     >
-                      <Sparkles className="h-5 w-5 animate-pulse" />
-                      <span className="font-display font-semibold text-lg">
-                        Fixing issue...
+                      <Sparkles className="h-5 w-5 text-accent animate-pulse" />
+                      <span className="font-display font-semibold text-base text-accent">
+                        Fixing...
                       </span>
                     </div>
 
                     {/* APPROVED stamp */}
                     <div 
-                      className={cn(
-                        "absolute flex items-center gap-3 px-6 py-3 rounded-xl border-3 transition-all duration-500",
-                        "border-success text-success bg-success/5"
-                      )}
+                      className="absolute inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-success/10 border-2 border-success/40"
                       style={{
                         opacity: phase3 > 0.7 ? 1 : 0,
-                        transform: `scale(${phase3 > 0.7 ? 1 : 0.5}) rotate(2deg)`,
-                        transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                        transform: `scale(${phase3 > 0.7 ? 1 : 0.9})`,
+                        transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
                       }}
                     >
-                      <CheckCircle className="h-6 w-6" />
-                      <span className="font-display font-bold text-xl uppercase tracking-wider">
+                      <CheckCircle className="h-5 w-5 text-success" />
+                      <span className="font-display font-bold text-lg text-success uppercase tracking-wide">
                         Approved
                       </span>
                     </div>
@@ -287,8 +281,8 @@ const PermitShowcase = () => {
 
             {/* Right - Content */}
             <div className="text-center lg:text-left">
-              {/* Phase indicator */}
-              <div className="flex items-center justify-center lg:justify-start gap-2 mb-6">
+              {/* Phase indicator - Modern pill design */}
+              <div className="inline-flex items-center gap-1 p-1.5 rounded-full bg-secondary/80 border border-border/50 mb-6">
                 {['Upload', 'Analyze', 'Submit'].map((step, index) => {
                   const isActive = (index === 0 && phase1 > 0.3) || 
                                    (index === 1 && phase2 > 0.3) || 
@@ -296,25 +290,24 @@ const PermitShowcase = () => {
                   const isPast = (index === 0 && phase2 > 0.3) || 
                                  (index === 1 && phase3 > 0.5);
                   return (
-                    <div key={step} className="flex items-center gap-2">
-                      <div className={cn(
-                        "w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300",
+                    <div 
+                      key={step} 
+                      className={cn(
+                        "flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300",
                         isPast ? "bg-success text-white" :
-                        isActive ? "bg-accent text-white" : 
-                        "bg-secondary text-muted-foreground"
-                      )}>
-                        {isPast ? <Check className="h-4 w-4" /> : index + 1}
-                      </div>
-                      <span className={cn(
-                        "text-sm font-medium transition-colors",
-                        isActive || isPast ? "text-foreground" : "text-muted-foreground"
-                      )}>{step}</span>
-                      {index < 2 && (
-                        <ArrowRight className={cn(
-                          "h-4 w-4 mx-1 transition-colors",
-                          isPast ? "text-success" : "text-border"
-                        )} />
+                        isActive ? "bg-accent text-white shadow-md" : 
+                        "text-muted-foreground"
                       )}
+                    >
+                      <div className={cn(
+                        "w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold transition-all duration-300",
+                        isPast ? "bg-white/20" :
+                        isActive ? "bg-white/20" : 
+                        "bg-muted-foreground/20"
+                      )}>
+                        {isPast ? <Check className="h-3 w-3" /> : index + 1}
+                      </div>
+                      <span className="text-sm font-medium">{step}</span>
                     </div>
                   );
                 })}
@@ -366,15 +359,6 @@ const PermitShowcase = () => {
           </div>
         </div>
 
-        {/* Scroll indicator */}
-        <div 
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center text-muted-foreground"
-          style={{ opacity: phase3 > 0.8 ? 0 : 1 - scrollProgress * 0.5 }}
-        >
-          <div className="w-6 h-10 rounded-full border-2 border-muted-foreground/30 flex items-start justify-center p-1">
-            <div className="w-1.5 h-2.5 bg-muted-foreground/50 rounded-full animate-bounce" />
-          </div>
-        </div>
       </div>
     </section>
   );
