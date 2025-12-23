@@ -5,7 +5,9 @@ import ProblemSection from "@/components/ProblemSection";
 import ComplianceReportPreview from "@/components/ComplianceReportPreview";
 import BenefitsSection from "@/components/BenefitsSection";
 import WhoItsFor from "@/components/WhoItsFor";
+import TestimonialsSection from "@/components/TestimonialsSection";
 import PricingSection from "@/components/PricingSection";
+import FAQSection from "@/components/FAQSection";
 import TrustSection from "@/components/TrustSection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
@@ -20,7 +22,9 @@ const Index = () => {
       <ComplianceReportPreview />
       <BenefitsSection />
       <WhoItsFor />
+      <TestimonialsSection />
       <PricingSection />
+      <FAQSection />
       <TrustSection />
       <CTASection />
       <Footer />
