@@ -23,21 +23,17 @@ const Navbar = () => {
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       isScrolled 
-        ? "bg-dark-bg/90 backdrop-blur-xl border-b border-dark-border shadow-lg" 
+        ? "bg-background/95 backdrop-blur-sm border-b border-border shadow-sm" 
         : "bg-transparent"
     }`}>
       <div className="container-wide">
         <div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
           {/* Logo */}
           <a href="/" className="flex items-center gap-2 group">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-purple-500 flex items-center justify-center shadow-glow group-hover:shadow-glow-lg transition-all duration-300">
-              <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M12 2L2 7l10 5 10-5-10-5z" strokeLinejoin="round"/>
-                <path d="M2 17l10 5 10-5" strokeLinejoin="round"/>
-                <path d="M2 12l10 5 10-5" strokeLinejoin="round"/>
-              </svg>
+            <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center">
+              <span className="text-primary-foreground font-display font-bold text-lg">P</span>
             </div>
-            <span className="font-display font-bold text-xl text-white">Permit Shark</span>
+            <span className="font-display font-bold text-xl text-foreground">Permit Shark</span>
           </a>
 
           {/* Desktop Navigation */}
@@ -46,57 +42,56 @@ const Navbar = () => {
               <a
                 key={link.label}
                 href={link.href}
-                className="text-sm font-medium text-white/70 hover:text-white transition-colors relative group"
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
               >
                 {link.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-purple-500 group-hover:w-full transition-all duration-300" />
               </a>
             ))}
           </div>
 
           {/* Desktop CTAs */}
           <div className="hidden md:flex items-center gap-3">
-            <Button variant="ghost" size="sm" className="text-white/70 hover:text-white hover:bg-white/10">
+            <Button variant="ghost" size="sm">
               Log In
             </Button>
-            <Button variant="glow" size="sm">
+            <Button size="sm">
               Get Started
             </Button>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 text-white"
+            className="md:hidden p-2"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
             {isMenuOpen ? (
-              <X className="h-6 w-6" />
+              <X className="h-6 w-6 text-foreground" />
             ) : (
-              <Menu className="h-6 w-6" />
+              <Menu className="h-6 w-6 text-foreground" />
             )}
           </button>
         </div>
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden bg-dark-bg/95 backdrop-blur-xl border-t border-dark-border">
+          <div className="md:hidden bg-background border-t border-border">
             <div className="px-4 py-6 space-y-4">
               {navLinks.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
-                  className="block text-base font-medium text-white/70 hover:text-white transition-colors"
+                  className="block text-base font-medium text-muted-foreground hover:text-foreground transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {link.label}
                 </a>
               ))}
               <div className="pt-4 space-y-3">
-                <Button variant="glass" className="w-full">
+                <Button variant="outline" className="w-full">
                   Log In
                 </Button>
-                <Button variant="glow" className="w-full">
+                <Button className="w-full">
                   Get Started
                 </Button>
               </div>

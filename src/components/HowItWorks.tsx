@@ -4,71 +4,64 @@ import AnimatedSection from "@/components/AnimatedSection";
 const HowItWorks = () => {
   const steps = [
     {
-      number: "01",
+      number: "1",
       icon: Upload,
-      title: "Upload Your Blueprint",
-      description: "Drop in your PDF floor plans. We support all standard architectural drawing formats.",
+      title: "Upload blueprint",
+      description: "Drop your PDF floor plans. We read them instantly.",
     },
     {
-      number: "02",
+      number: "2",
       icon: MapPin,
-      title: "Select Your City",
-      description: "Choose the jurisdiction. We load the specific zoning and building codes that apply.",
+      title: "Select city",
+      description: "We load your jurisdiction's specific zoning codes.",
     },
     {
-      number: "03",
+      number: "3",
       icon: FileCheck,
-      title: "Get Your Report",
-      description: "Receive a detailed compliance check in minutes, not months. Know exactly what to fix.",
+      title: "Get report",
+      description: "Know exactly what to fix—before the city tells you.",
     },
   ];
 
   return (
-    <section className="section-padding bg-background relative overflow-hidden" id="how-it-works">
-      {/* Subtle mesh gradient */}
-      <div className="absolute inset-0 mesh-gradient opacity-50" />
-      
-      <div className="relative container-wide">
+    <section className="section-padding bg-background" id="how-it-works">
+      <div className="container-wide">
         <AnimatedSection className="text-center mb-16">
-          <span className="text-primary font-semibold text-sm uppercase tracking-wider">How It Works</span>
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mt-3 mb-4">
-            Three Steps to Clarity
+          <p className="text-accent font-semibold text-sm uppercase tracking-wider mb-3">How It Works</p>
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+            Three steps. Zero stamps.
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            From blueprint to compliance report in minutes.
-          </p>
         </AnimatedSection>
 
-        <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
-          {steps.map((step, index) => (
-            <AnimatedSection key={step.number} delay={index * 150} animation="scale">
-              <div className="relative">
-                {/* Connector Line */}
-                {index < steps.length - 1 && (
-                  <div className="hidden md:flex absolute top-16 left-[55%] items-center w-full z-0">
-                    <div className="flex-1 h-px bg-gradient-to-r from-border via-primary/30 to-border" />
-                    <ArrowRight className="h-4 w-4 text-primary/50 -ml-2" />
-                  </div>
-                )}
-                
-                <div className="relative text-center z-10">
-                  {/* Step number badge */}
-                  <div className="inline-flex items-center justify-center w-28 h-28 rounded-3xl bg-gradient-to-br from-secondary to-background border border-border mb-6 relative group hover:border-primary/30 transition-all duration-300">
-                    <step.icon className="h-12 w-12 text-primary group-hover:scale-110 transition-transform" />
-                    <span className="absolute -top-2 -right-2 w-10 h-10 bg-gradient-to-br from-primary to-purple-500 text-white rounded-xl flex items-center justify-center text-sm font-bold shadow-glow">
+        <div className="max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-8">
+            {steps.map((step, index) => (
+              <AnimatedSection key={step.number} delay={index * 150}>
+                <div className="relative text-center">
+                  {/* Connector */}
+                  {index < steps.length - 1 && (
+                    <div className="hidden md:block absolute top-8 left-[60%] w-full">
+                      <ArrowRight className="h-5 w-5 text-border" />
+                    </div>
+                  )}
+                  
+                  {/* Step */}
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-secondary mb-4 relative group hover:bg-accent/10 transition-colors">
+                    <step.icon className="h-7 w-7 text-foreground group-hover:text-accent transition-colors" />
+                    <span className="absolute -top-1 -right-1 w-6 h-6 bg-foreground text-background rounded-lg flex items-center justify-center text-xs font-bold">
                       {step.number}
                     </span>
                   </div>
-                  <h3 className="font-display text-xl font-semibold text-foreground mb-3">
+                  <h3 className="font-display text-lg font-semibold text-foreground mb-2">
                     {step.title}
                   </h3>
-                  <p className="text-muted-foreground leading-relaxed max-w-xs mx-auto">
+                  <p className="text-muted-foreground text-sm leading-relaxed">
                     {step.description}
                   </p>
                 </div>
-              </div>
-            </AnimatedSection>
-          ))}
+              </AnimatedSection>
+            ))}
+          </div>
         </div>
       </div>
     </section>
