@@ -1,42 +1,44 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, AlertCircle, CheckCircle, Zap, FileText, XCircle } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { cn } from "@/lib/utils";
 
 const HeroSection = () => {
+  const { ref: contentRef, isVisible: contentVisible } = useScrollAnimation();
+  const { ref: mockupRef, isVisible: mockupVisible } = useScrollAnimation();
+
   return (
     <section className="relative min-h-[90vh] overflow-hidden bg-background">
       <div className="relative px-4 sm:px-6 lg:px-8 py-12 sm:py-16 pt-24 sm:pt-28 lg:pt-32">
         <div className="container-wide">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Left - Content with staggered animations */}
-            <div className="space-y-6">
+            {/* Left - Content */}
+            <div 
+              ref={contentRef}
+              className={cn(
+                "transition-all duration-700",
+                contentVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+              )}
+            >
               {/* Badge */}
-              <div 
-                className="badge-accent opacity-0 animate-[fade-in_0.6s_ease-out_0.1s_forwards]"
-              >
+              <div className="badge-accent mb-6">
                 <AlertCircle className="h-4 w-4" />
                 <span>Stop the rejection cycle</span>
               </div>
 
               {/* Headline */}
-              <h1 
-                className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-[1.1] opacity-0 animate-[fade-in_0.6s_ease-out_0.25s_forwards]"
-              >
+              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-[1.1] mb-6">
                 Still filing permits like it's{" "}
                 <span className="text-accent underline decoration-wavy decoration-accent/30 underline-offset-4">1999?</span>
               </h1>
 
               {/* Subheadline */}
-              <p 
-                className="text-lg text-muted-foreground max-w-lg leading-relaxed opacity-0 animate-[fade-in_0.6s_ease-out_0.4s_forwards]"
-              >
+              <p className="text-lg text-muted-foreground mb-8 max-w-lg leading-relaxed">
                 Stop guessing if your blueprints will pass. Check zoning compliance before the city rejects you—saving months and thousands in redesigns.
               </p>
 
               {/* CTAs */}
-              <div 
-                className="flex flex-col sm:flex-row gap-4 opacity-0 animate-[fade-in_0.6s_ease-out_0.55s_forwards]"
-              >
+              <div className="flex flex-col sm:flex-row gap-4 mb-6">
                 <Button size="xl" className="group">
                   Check Your Compliance
                   <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
@@ -46,16 +48,18 @@ const HeroSection = () => {
                 </Button>
               </div>
 
-              <p 
-                className="text-sm text-muted-foreground opacity-0 animate-[fade-in_0.6s_ease-out_0.7s_forwards]"
-              >
+              <p className="text-sm text-muted-foreground">
                 No stamps required. Results in minutes.
               </p>
             </div>
 
             {/* Right - Creative Paper Form Mockup */}
             <div 
-              className="relative opacity-0 animate-[fade-in_0.8s_ease-out_0.5s_forwards]"
+              ref={mockupRef}
+              className={cn(
+                "relative transition-all duration-700 delay-200",
+                mockupVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+              )}
             >
               <div className="relative flex justify-center lg:justify-end">
                 {/* Main Paper Permit Form */}
