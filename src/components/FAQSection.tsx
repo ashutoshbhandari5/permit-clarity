@@ -51,7 +51,7 @@ const faqs = [
 
 const FAQSection = () => {
   return (
-    <section className="relative py-20 sm:py-28 bg-background overflow-hidden">
+    <section id="faq" className="relative py-20 sm:py-28 bg-background overflow-hidden">
       {/* Background elements */}
       <div className="absolute top-40 right-10 w-72 h-72 bg-accent/5 rounded-full blur-3xl parallax-slow" />
 
