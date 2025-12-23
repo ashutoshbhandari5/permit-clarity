@@ -4,11 +4,18 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
+import { CheckCircle, FileText, Clock, Shield } from "lucide-react";
 
 const SignIn = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const features = [
+    { icon: FileText, text: "Upload blueprints and get instant compliance checks" },
+    { icon: Clock, text: "Save weeks of manual permit review time" },
+    { icon: Shield, text: "Catch issues before the city rejects your plans" },
+  ];
 
   return (
     <div className="min-h-screen bg-background flex">
@@ -17,10 +24,10 @@ const SignIn = () => {
         <div className="w-full max-w-sm">
           {/* Logo */}
           <div className="flex items-center gap-2.5 mb-8">
-            <div className="w-9 h-9 rounded-lg bg-sidebar-primary flex items-center justify-center">
+            <div className="w-9 h-9 rounded-lg bg-foreground flex items-center justify-center">
               <svg 
                 viewBox="0 0 24 24" 
-                className="w-5 h-5 text-sidebar-primary-foreground"
+                className="w-5 h-5 text-background"
                 fill="currentColor"
               >
                 <path d="M12 2C10.5 2 9 3.5 9 5c0 1.5 1.5 3 3 4.5 1.5-1.5 3-3 3-4.5 0-1.5-1.5-3-3-3zm-7 9c-1.5 1.5-3 3-3 4.5C2 17 3.5 19 5.5 19c1.5 0 3-1 4.5-2.5-2-1.5-4-3.5-5-5.5zm14 0c-1 2-3 4-5 5.5 1.5 1.5 3 2.5 4.5 2.5 2 0 3.5-2 3.5-3.5 0-1.5-1.5-3-3-4.5zM12 11c-2 2-4 4-5 6 1.5 2.5 3.5 4 5 5 1.5-1 3.5-2.5 5-5-1-2-3-4-5-6z"/>
@@ -60,7 +67,7 @@ const SignIn = () => {
                 <Label htmlFor="password" className="text-sm font-medium">
                   Password
                 </Label>
-                <Link to="/forgot-password" className="text-xs text-sidebar-primary hover:underline">
+                <Link to="/forgot-password" className="text-xs text-accent hover:underline">
                   Forgot password?
                 </Link>
               </div>
@@ -75,7 +82,7 @@ const SignIn = () => {
             </div>
 
             <Button 
-              className="w-full h-10 bg-sidebar-primary hover:bg-sidebar-primary/90"
+              className="w-full h-10 bg-foreground text-background hover:bg-foreground/90"
               onClick={() => navigate("/onboarding")}
             >
               Sign In
@@ -102,48 +109,70 @@ const SignIn = () => {
           {/* Footer */}
           <p className="text-sm text-muted-foreground text-center mt-6">
             Don't have an account?{" "}
-            <Link to="/sign-up" className="text-sidebar-primary font-medium hover:underline">
+            <Link to="/sign-up" className="text-accent font-medium hover:underline">
               Create account
             </Link>
           </p>
         </div>
       </div>
 
-      {/* Right - Branded Panel */}
-      <div className="hidden lg:flex w-2/5 bg-foreground p-10 flex-col justify-between relative overflow-hidden">
-        {/* Blueprint Grid Pattern */}
+      {/* Right - Branded Panel with Warm Theme */}
+      <div className="hidden lg:flex w-2/5 bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100 p-10 flex-col justify-between relative overflow-hidden border-l border-amber-200/50">
+        {/* Paper texture overlay */}
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjQiIGZpbGw9IiNmZmYiIG9wYWNpdHk9IjAuMDUiLz48L3N2Zz4=')] opacity-50 pointer-events-none" />
+        
+        {/* Grid Pattern */}
         <div 
-          className="absolute inset-0 opacity-5"
+          className="absolute inset-0 opacity-[0.08]"
           style={{
             backgroundImage: `
-              linear-gradient(hsl(var(--background) / 0.3) 1px, transparent 1px),
-              linear-gradient(90deg, hsl(var(--background) / 0.3) 1px, transparent 1px)
+              linear-gradient(hsl(24 95% 20% / 0.5) 1px, transparent 1px),
+              linear-gradient(90deg, hsl(24 95% 20% / 0.5) 1px, transparent 1px)
             `,
-            backgroundSize: '24px 24px',
+            backgroundSize: '32px 32px',
           }}
         />
         
+        {/* Top Content */}
         <div className="relative z-10">
-          <h2 className="font-display text-2xl font-bold text-background mb-3">
+          <div className="badge-accent mb-6">
+            <CheckCircle className="h-4 w-4" />
+            <span>Trusted by 500+ architects</span>
+          </div>
+          
+          <h2 className="font-display text-2xl font-bold text-amber-900 mb-3">
             Permit compliance,<br />made simple.
           </h2>
-          <p className="text-background/70 text-sm max-w-xs">
-            Upload blueprints. Get instant compliance reports. Save weeks of manual review.
+          <p className="text-amber-800/70 text-sm max-w-xs leading-relaxed">
+            Join architects and developers who save weeks on every permit submission.
           </p>
         </div>
 
+        {/* Features List */}
+        <div className="relative z-10 space-y-4">
+          {features.map((feature, index) => (
+            <div key={index} className="flex items-start gap-3">
+              <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
+                <feature.icon className="h-4 w-4 text-accent" />
+              </div>
+              <p className="text-sm text-amber-900/80 pt-1.5">{feature.text}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Testimonial */}
         <div className="relative z-10">
-          <div className="bg-background/5 backdrop-blur-sm rounded-lg p-4 border border-background/10">
-            <blockquote className="text-sm text-background/90 mb-3">
+          <div className="bg-white/60 backdrop-blur-sm rounded-lg p-4 border border-amber-200/50 shadow-sm">
+            <blockquote className="text-sm text-amber-900/90 mb-3 italic">
               "Permit Shark transformed our permit submission process. What used to take weeks now takes hours."
             </blockquote>
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-background/10 flex items-center justify-center text-xs font-medium text-background">
+              <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center text-xs font-semibold text-accent">
                 SC
               </div>
               <div>
-                <p className="text-xs font-medium text-background">Sarah Chen</p>
-                <p className="text-xs text-background/50">Principal Architect, Chen & Associates</p>
+                <p className="text-xs font-semibold text-amber-900">Sarah Chen</p>
+                <p className="text-xs text-amber-700/60">Principal Architect, Chen & Associates</p>
               </div>
             </div>
           </div>
