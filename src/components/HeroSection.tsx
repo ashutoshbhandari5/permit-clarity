@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, AlertCircle, CheckCircle, XCircle } from "lucide-react";
+import { ArrowRight, AlertCircle, CheckCircle, Zap, FileText, XCircle } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { cn } from "@/lib/utils";
 
@@ -53,7 +53,7 @@ const HeroSection = () => {
               </p>
             </div>
 
-            {/* Right - Creative Illustration */}
+            {/* Right - Creative Paper Form Mockup */}
             <div 
               ref={mockupRef}
               className={cn(
@@ -61,60 +61,144 @@ const HeroSection = () => {
                 mockupVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               )}
             >
-              <div className="relative">
-                {/* Main visual - Modern permit card with shark branding */}
-                <div className="relative bg-gradient-to-br from-foreground to-foreground/90 rounded-3xl p-6 sm:p-8 shadow-2xl transform hover:rotate-[-1deg] transition-transform duration-500">
-                  {/* Decorative elements */}
-                  <div className="absolute top-4 right-4 w-20 h-20 bg-accent/20 rounded-full blur-2xl" />
-                  <div className="absolute bottom-4 left-4 w-16 h-16 bg-success/20 rounded-full blur-2xl" />
+              <div className="relative flex justify-center lg:justify-end">
+                {/* Main Paper Permit Form */}
+                <div className="relative transform rotate-2 hover:rotate-0 transition-transform duration-500">
+                  {/* Shadow/depth layer */}
+                  <div className="absolute inset-0 bg-amber-900/10 rounded-lg transform translate-x-3 translate-y-3 -z-10" />
                   
-                  {/* Header */}
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-accent to-orange-400 flex items-center justify-center shadow-lg">
-                      <svg viewBox="0 0 24 24" className="w-7 h-7 text-white" fill="currentColor">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-                      </svg>
-                    </div>
-                    <div>
-                      <p className="text-xs text-white/60 uppercase tracking-wider">Permit Shark</p>
-                      <p className="text-lg font-display font-bold text-white">Compliance Report</p>
-                    </div>
-                  </div>
-
-                  {/* Stats grid */}
-                  <div className="grid grid-cols-2 gap-3 mb-6">
-                    <div className="bg-white/10 backdrop-blur rounded-xl p-3">
-                      <p className="text-2xl font-display font-bold text-white">4/4</p>
-                      <p className="text-xs text-white/60">Checks Passed</p>
-                    </div>
-                    <div className="bg-white/10 backdrop-blur rounded-xl p-3">
-                      <p className="text-2xl font-display font-bold text-success">0</p>
-                      <p className="text-xs text-white/60">Issues Found</p>
-                    </div>
-                  </div>
-
-                  {/* Compliance items */}
-                  <div className="space-y-2 mb-4">
-                    {['Setback requirements', 'Height limits', 'Lot coverage', 'Zoning compliance'].map((item, i) => (
-                      <div key={item} className="flex items-center gap-2 text-sm text-white/80">
-                        <CheckCircle className="h-4 w-4 text-success flex-shrink-0" />
-                        <span>{item}</span>
+                  {/* Paper form */}
+                  <div className="relative bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100 rounded-lg border-2 border-amber-200/70 shadow-2xl p-6 sm:p-8 max-w-md">
+                    {/* Paper texture overlay */}
+                    <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjQiIGZpbGw9IiNmZmYiIG9wYWNpdHk9IjAuMDUiLz48L3N2Zz4=')] opacity-50 pointer-events-none rounded-lg" />
+                    
+                    {/* Header */}
+                    <div className="flex items-start justify-between mb-4">
+                      <div>
+                        <p className="text-[10px] text-amber-700/60 uppercase tracking-widest font-semibold">
+                          City Planning Department
+                        </p>
+                        <h3 className="font-display font-bold text-xl sm:text-2xl text-amber-900 uppercase tracking-wide">
+                          Building Permit
+                        </h3>
+                        <p className="text-xs text-amber-700/50 font-mono mt-0.5">
+                          Form BP-2024 • Rev. 03/2024
+                        </p>
                       </div>
-                    ))}
+                      {/* Official stamp box */}
+                      <div className="border-2 border-dashed border-amber-400/50 rounded p-2 text-center">
+                        <p className="text-[8px] text-amber-600/60 uppercase font-semibold">Official</p>
+                        <p className="text-[8px] text-amber-600/60 uppercase">Use Only</p>
+                        <div className="h-px bg-amber-400/30 my-1" />
+                        <p className="text-[7px] text-amber-600/40 uppercase">Stamp Here</p>
+                      </div>
+                    </div>
+
+                    {/* Form fields */}
+                    <div className="space-y-3 mb-4">
+                      {/* Field 1 */}
+                      <div>
+                        <p className="text-[10px] text-amber-800 font-semibold uppercase mb-1">
+                          1. Property Address
+                        </p>
+                        <div className="bg-white/60 border border-amber-300/50 rounded px-3 py-2">
+                          <p className="text-sm text-amber-900 font-mono">1847 Oak Street, San Francisco</p>
+                        </div>
+                      </div>
+
+                      {/* Field 2 - Checkboxes */}
+                      <div>
+                        <p className="text-[10px] text-amber-800 font-semibold uppercase mb-1.5">
+                          2. Compliance Checks Required
+                        </p>
+                        <div className="grid grid-cols-2 gap-2">
+                          {[
+                            { label: "Setback Requirements", checked: true },
+                            { label: "Height Limits", checked: true },
+                            { label: "Lot Coverage", checked: true },
+                            { label: "Zoning Code", checked: false },
+                          ].map((item) => (
+                            <div key={item.label} className="flex items-center gap-1.5">
+                              <div className={cn(
+                                "w-3.5 h-3.5 rounded border flex items-center justify-center",
+                                item.checked 
+                                  ? "bg-amber-200/50 border-amber-400" 
+                                  : "bg-white/50 border-amber-300/50"
+                              )}>
+                                {item.checked && <CheckCircle className="h-2.5 w-2.5 text-amber-700" />}
+                              </div>
+                              <span className="text-[10px] text-amber-800">{item.label}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Field 3 - Issues */}
+                      <div>
+                        <p className="text-[10px] text-amber-800 font-semibold uppercase mb-1">
+                          3. Issues Found
+                        </p>
+                        <div className="bg-error/5 border border-error/20 rounded px-3 py-2">
+                          <p className="text-xs text-error font-medium">Rear setback: 8ft (requires 10ft min)</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Divider line */}
+                    <div className="relative my-4">
+                      <div className="border-t-2 border-dashed border-error/30" />
+                      <div className="absolute -top-2 left-1/2 -translate-x-1/2 bg-amber-50 px-2">
+                        <span className="text-[8px] text-error/60 uppercase tracking-wider font-semibold flex items-center gap-1">
+                          <AlertCircle className="h-2.5 w-2.5" />
+                          Do Not Write Below This Line
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* REJECTED Stamp */}
+                    <div className="flex justify-center">
+                      <div className="relative transform -rotate-6">
+                        <div className="px-6 py-2 border-4 border-error rounded-sm bg-error/5">
+                          <div className="flex items-center gap-2">
+                            <XCircle className="h-5 w-5 text-error" />
+                            <span className="font-display font-black text-2xl text-error uppercase tracking-wider">
+                              Rejected
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Footer note */}
+                    <p className="text-[8px] text-amber-600/50 text-center mt-4 italic">
+                      Paperwork Reduction Act: We estimate this process takes 4-6 weeks manually.
+                    </p>
                   </div>
 
-                  {/* Ready badge */}
-                  <div className="flex items-center justify-center gap-2 bg-success/20 text-success rounded-full py-2 px-4 text-sm font-medium">
-                    <CheckCircle className="h-4 w-4" />
-                    Ready to Submit
+                  {/* Floating "Analyzing" badge */}
+                  <div className="absolute -right-4 top-1/3 sm:-right-8 bg-background border border-border shadow-xl rounded-xl p-3 transform rotate-3 animate-float">
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center">
+                        <Zap className="h-4 w-4 text-accent animate-pulse" />
+                      </div>
+                      <div>
+                        <p className="text-xs font-semibold text-foreground">Analyzing...</p>
+                        <p className="text-[10px] text-muted-foreground">2,847 permits checked</p>
+                      </div>
+                    </div>
                   </div>
-                </div>
 
-
-                {/* Scroll indicator */}
-                <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center text-muted-foreground">
-                  <div className="w-5 h-8 rounded-full border-2 border-muted-foreground/30 flex items-start justify-center p-1">
-                    <div className="w-1 h-2 bg-muted-foreground/50 rounded-full animate-bounce" />
+                  {/* Floating success card */}
+                  <div className="absolute -left-4 -bottom-4 sm:-left-8 sm:-bottom-6 bg-background border border-success/30 shadow-xl rounded-xl p-3 transform -rotate-3">
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 rounded-lg bg-success/10 flex items-center justify-center">
+                        <CheckCircle className="h-4 w-4 text-success" />
+                      </div>
+                      <div>
+                        <p className="text-xs font-semibold text-foreground">Issue Found</p>
+                        <p className="text-[10px] text-success">Fix available →</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
