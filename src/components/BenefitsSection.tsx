@@ -36,8 +36,15 @@ const BenefitsSection = () => {
   ];
 
   return (
-    <section className="section-padding bg-background" id="features">
-      <div className="container-wide">
+    <section className="relative section-padding bg-background overflow-hidden" id="features">
+      {/* Parallax background */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="parallax-medium absolute top-40 -right-20 w-80 h-80 bg-success/5 rounded-full blur-3xl" />
+        <div className="parallax-slow absolute -bottom-20 left-[20%] w-64 h-64 bg-accent/5 rounded-full blur-3xl" />
+        <div className="parallax-fast absolute top-20 left-[10%] w-40 h-40 bg-secondary rounded-full blur-2xl" />
+      </div>
+      
+      <div className="container-wide relative z-10">
         <AnimatedSection className="text-center mb-12">
           <p className="text-accent font-semibold text-sm uppercase tracking-wider mb-3">Benefits</p>
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">

@@ -27,8 +27,14 @@ const TrustSection = () => {
   ];
 
   return (
-    <section className="section-padding bg-background">
-      <div className="container-wide">
+    <section className="relative section-padding bg-background overflow-hidden">
+      {/* Parallax background */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="parallax-slow absolute top-1/4 -left-10 w-60 h-60 bg-accent/5 rounded-full blur-3xl" />
+        <div className="parallax-fast absolute bottom-1/4 right-[5%] w-72 h-72 bg-success/5 rounded-full blur-3xl" />
+      </div>
+      
+      <div className="container-wide relative z-10">
         {/* Stats */}
         <div className="grid sm:grid-cols-3 gap-6 mb-16">
           {stats.map((stat, index) => (

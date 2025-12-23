@@ -30,8 +30,14 @@ const ProblemSection = () => {
   ];
 
   return (
-    <section className="section-padding bg-secondary/50">
-      <div className="container-wide">
+    <section className="relative section-padding bg-secondary/50 overflow-hidden">
+      {/* Parallax background */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="parallax-slow absolute -top-20 -left-20 w-72 h-72 bg-accent/5 rounded-full blur-3xl" />
+        <div className="parallax-medium absolute bottom-10 right-[10%] w-96 h-96 bg-foreground/5 rounded-full blur-3xl" />
+      </div>
+      
+      <div className="container-wide relative z-10">
         <AnimatedSection className="text-center mb-12">
           <p className="text-accent font-semibold text-sm uppercase tracking-wider mb-3">The Problem</p>
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
