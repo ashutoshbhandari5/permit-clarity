@@ -193,6 +193,22 @@
     animation: float 6s ease-in-out infinite;
   }
 
+  /* Parallax utilities */
+  .parallax-slow {
+    will-change: transform;
+    animation: parallaxFloat 20s ease-in-out infinite;
+  }
+
+  .parallax-medium {
+    will-change: transform;
+    animation: parallaxFloat 15s ease-in-out infinite reverse;
+  }
+
+  .parallax-fast {
+    will-change: transform;
+    animation: parallaxFloat 10s ease-in-out infinite;
+  }
+
   @keyframes fadeUp {
     from {
       opacity: 0;
@@ -212,6 +228,21 @@
   @keyframes float {
     0%, 100% { transform: translateY(0) rotate(-2deg); }
     50% { transform: translateY(-10px) rotate(-1deg); }
+  }
+
+  @keyframes parallaxFloat {
+    0%, 100% { 
+      transform: translateY(0) translateX(0) scale(1); 
+    }
+    25% { 
+      transform: translateY(-30px) translateX(15px) scale(1.05); 
+    }
+    50% { 
+      transform: translateY(-15px) translateX(-10px) scale(0.98); 
+    }
+    75% { 
+      transform: translateY(-40px) translateX(20px) scale(1.02); 
+    }
   }
 
   .stagger-1 { animation-delay: 0.1s; }
