@@ -110,18 +110,18 @@ const HeroSection = () => {
                   </div>
                 </div>
 
-                {/* Floating rejected version behind */}
-                <div className="absolute -bottom-4 -left-4 sm:-bottom-6 sm:-left-8 w-3/4 bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-4 shadow-lg transform rotate-6 -z-10 opacity-60">
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="w-8 h-8 rounded-xl bg-amber-200 flex items-center justify-center">
-                      <XCircle className="h-4 w-4 text-amber-700" />
+                {/* Floating rejected version behind - cleaner styling */}
+                <div className="absolute -bottom-3 -left-3 sm:-bottom-4 sm:-left-6 w-2/3 bg-gradient-to-br from-amber-100/80 to-orange-100/80 rounded-xl p-3 shadow-md transform rotate-3 -z-10 border border-amber-200/50">
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="w-6 h-6 rounded-lg bg-amber-200 flex items-center justify-center">
+                      <XCircle className="h-3 w-3 text-amber-700" />
                     </div>
-                    <div>
-                      <p className="text-[10px] text-amber-800/60 uppercase">Old Way</p>
-                      <p className="text-xs font-semibold text-amber-900">Paper Permit</p>
-                    </div>
+                    <p className="text-[10px] font-medium text-amber-800">Old Permit</p>
                   </div>
-                  <div className="stamp text-xs px-2 py-1">REJECTED</div>
+                  <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-error/10 border border-error/30">
+                    <XCircle className="h-3 w-3 text-error" />
+                    <span className="text-[10px] font-bold text-error uppercase tracking-wide">Rejected</span>
+                  </div>
                 </div>
 
                 {/* Scroll indicator */}
