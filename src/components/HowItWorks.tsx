@@ -23,14 +23,18 @@ const HowItWorks = () => {
   ];
 
   return (
-    <section className="section-padding bg-background" id="how-it-works">
-      <div className="container-wide">
+    <section className="section-padding bg-background relative overflow-hidden" id="how-it-works">
+      {/* Subtle mesh gradient */}
+      <div className="absolute inset-0 mesh-gradient opacity-50" />
+      
+      <div className="relative container-wide">
         <div className="text-center mb-16 opacity-0 animate-fade-up">
-          <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-4">
-            How It Works
+          <span className="text-primary font-semibold text-sm uppercase tracking-wider">How It Works</span>
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mt-3 mb-4">
+            Three Steps to Clarity
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Three simple steps from blueprint to compliance clarity.
+            From blueprint to compliance report in minutes.
           </p>
         </div>
 
@@ -42,22 +46,24 @@ const HowItWorks = () => {
             >
               {/* Connector Line */}
               {index < steps.length - 1 && (
-                <div className="hidden md:block absolute top-12 left-[60%] w-full">
-                  <ArrowRight className="h-5 w-5 text-border" />
+                <div className="hidden md:flex absolute top-16 left-[55%] items-center w-full z-0">
+                  <div className="flex-1 h-px bg-gradient-to-r from-border via-primary/30 to-border" />
+                  <ArrowRight className="h-4 w-4 text-primary/50 -ml-2" />
                 </div>
               )}
               
-              <div className="text-center">
-                <div className="inline-flex items-center justify-center w-24 h-24 rounded-2xl bg-secondary mb-6 relative">
-                  <step.icon className="h-10 w-10 text-primary" />
-                  <span className="absolute -top-2 -right-2 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-sm font-bold">
+              <div className="relative text-center z-10">
+                {/* Step number badge */}
+                <div className="inline-flex items-center justify-center w-28 h-28 rounded-3xl bg-gradient-to-br from-secondary to-background border border-border mb-6 relative group hover:border-primary/30 transition-all duration-300">
+                  <step.icon className="h-12 w-12 text-primary group-hover:scale-110 transition-transform" />
+                  <span className="absolute -top-2 -right-2 w-10 h-10 bg-gradient-to-br from-primary to-purple-500 text-white rounded-xl flex items-center justify-center text-sm font-bold shadow-glow">
                     {step.number}
                   </span>
                 </div>
                 <h3 className="font-display text-xl font-semibold text-foreground mb-3">
                   {step.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-muted-foreground leading-relaxed max-w-xs mx-auto">
                   {step.description}
                 </p>
               </div>
