@@ -46,16 +46,21 @@ const Navbar = () => {
     }`}>
       <div className="container-wide">
         <div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
-          {/* Logo - Shark icon only */}
+          {/* Logo - Shark icon */}
           <a href="/" className="flex items-center gap-2 group">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-accent to-orange-500 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow">
-              {/* Shark fin SVG icon */}
+              {/* Shark SVG icon */}
               <svg 
                 viewBox="0 0 24 24" 
-                className="w-6 h-6 text-white"
+                className="w-7 h-7 text-white"
                 fill="currentColor"
               >
-                <path d="M12 2C10.5 2 9 3.5 9 5c0 1.5 1.5 3 3 4.5 1.5-1.5 3-3 3-4.5 0-1.5-1.5-3-3-3zm-7 9c-1.5 1.5-3 3-3 4.5C2 17 3.5 19 5.5 19c1.5 0 3-1 4.5-2.5-2-1.5-4-3.5-5-5.5zm14 0c-1 2-3 4-5 5.5 1.5 1.5 3 2.5 4.5 2.5 2 0 3.5-2 3.5-3.5 0-1.5-1.5-3-3-4.5zM12 11c-2 2-4 4-5 6 1.5 2.5 3.5 4 5 5 1.5-1 3.5-2.5 5-5-1-2-3-4-5-6z"/>
+                {/* Shark body */}
+                <path d="M2 11c0 0 3-1 5-1c1 0 2 0.5 3 1.5c1.5-0.5 3-0.5 4 0c1-1 2-1.5 3-1.5c2 0 5 1 5 1s-1 3-3 5c-0.5 0.5-1 0.8-1.5 1l0.5 2.5l-2-1l-1 2l-1-2l-1 2l-1-2l-2 1l0.5-2.5c-0.5-0.2-1-0.5-1.5-1C7 14 2 11 2 11z"/>
+                {/* Dorsal fin */}
+                <path d="M12 4L10 10h4L12 4z"/>
+                {/* Eye */}
+                <circle cx="7" cy="10.5" r="0.8" fill="white"/>
               </svg>
             </div>
           </a>
