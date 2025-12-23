@@ -202,31 +202,6 @@ const HeroSection = () => {
                   </div>
                 </div>
 
-                {/* Mobile-only floating badges - positioned below the card */}
-                <div className="sm:hidden absolute -bottom-16 left-0 right-0 flex justify-between px-2">
-                  <div className="bg-background border border-success/30 shadow-lg rounded-xl p-2 transform -rotate-2">
-                    <div className="flex items-center gap-1.5">
-                      <div className="w-6 h-6 rounded-lg bg-success/10 flex items-center justify-center">
-                        <CheckCircle className="h-3 w-3 text-success" />
-                      </div>
-                      <div>
-                        <p className="text-[9px] font-semibold text-foreground">Issue Found</p>
-                        <p className="text-[8px] text-success">Fix available →</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="bg-background border border-border shadow-lg rounded-xl p-2 transform rotate-2">
-                    <div className="flex items-center gap-1.5">
-                      <div className="w-6 h-6 rounded-lg bg-accent/10 flex items-center justify-center">
-                        <Zap className="h-3 w-3 text-accent animate-pulse" />
-                      </div>
-                      <div>
-                        <p className="text-[9px] font-semibold text-foreground">Analyzing...</p>
-                        <p className="text-[8px] text-muted-foreground">2,847 checked</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>

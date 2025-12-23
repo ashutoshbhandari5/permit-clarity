@@ -48,7 +48,7 @@ const PermitShowcase = () => {
   return (
     <section 
       ref={sectionRef}
-      className="relative min-h-[200vh] bg-gradient-to-b from-background via-secondary/30 to-background"
+      className="relative min-h-[200vh] bg-background"
     >
       {/* Sticky container */}
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
