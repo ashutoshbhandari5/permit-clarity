@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { 
   LayoutDashboard, 
@@ -8,7 +8,8 @@ import {
   HelpCircle, 
   Plus,
   Menu,
-  X
+  Sun,
+  Moon
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -28,9 +29,11 @@ const navItems = [
 
 interface SidebarContentProps {
   onNewProject: () => void;
+  isDark: boolean;
+  onToggleTheme: () => void;
 }
 
-const SidebarContent = ({ onNewProject }: SidebarContentProps) => {
+const SidebarContent = ({ onNewProject, isDark, onToggleTheme }: SidebarContentProps) => {
   const location = useLocation();
 
   return (
@@ -88,7 +91,19 @@ const SidebarContent = ({ onNewProject }: SidebarContentProps) => {
       </nav>
 
       {/* User Section */}
-      <div className="p-3 border-t border-sidebar-border">
+      <div className="p-3 border-t border-sidebar-border space-y-2">
+        {/* Theme Toggle */}
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={onToggleTheme}
+          className="w-full justify-start gap-2.5 px-2 text-sidebar-foreground hover:text-foreground hover:bg-sidebar-accent/50"
+        >
+          {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+          {isDark ? "Light Mode" : "Dark Mode"}
+        </Button>
+
+        {/* User Info */}
         <div className="flex items-center gap-2.5 px-2 py-1.5">
           <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center text-xs font-medium text-foreground">
             AA
@@ -111,12 +126,37 @@ interface DashboardSidebarProps {
 
 const DashboardSidebar = ({ onNewProject }: DashboardSidebarProps) => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    // Check initial theme from localStorage or default to light
+    const savedTheme = localStorage.getItem("theme");
+    const prefersDark = savedTheme === "dark";
+    setIsDark(prefersDark);
+    if (prefersDark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const newIsDark = !isDark;
+    setIsDark(newIsDark);
+    if (newIsDark) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  };
 
   return (
     <>
       {/* Desktop Sidebar */}
       <aside className="hidden lg:flex w-60 border-r border-sidebar-border bg-sidebar/50 backdrop-blur-sm flex-col h-screen fixed left-0 top-0">
-        <SidebarContent onNewProject={onNewProject} />
+        <SidebarContent onNewProject={onNewProject} isDark={isDark} onToggleTheme={toggleTheme} />
       </aside>
 
       {/* Mobile Header */}
@@ -128,10 +168,14 @@ const DashboardSidebar = ({ onNewProject }: DashboardSidebarProps) => {
             </Button>
           </SheetTrigger>
           <SheetContent side="left" className="w-60 p-0">
-            <SidebarContent onNewProject={() => {
-              onNewProject();
-              setMobileOpen(false);
-            }} />
+            <SidebarContent 
+              onNewProject={() => {
+                onNewProject();
+                setMobileOpen(false);
+              }} 
+              isDark={isDark} 
+              onToggleTheme={toggleTheme}
+            />
           </SheetContent>
         </Sheet>
         <div className="flex items-center gap-2 ml-3">
