@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FolderKanban, TrendingUp, Coins } from "lucide-react";
 import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import StatsCard from "@/components/dashboard/StatsCard";
@@ -8,6 +8,14 @@ import NewProjectSheet from "@/components/dashboard/NewProjectSheet";
 
 const Dashboard = () => {
   const [showNewProject, setShowNewProject] = useState(false);
+
+  // Enable dark mode for authenticated pages
+  useEffect(() => {
+    document.documentElement.classList.add("dark");
+    return () => {
+      document.documentElement.classList.remove("dark");
+    };
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">
