@@ -1,58 +1,74 @@
 import { useState } from "react";
-import { Plus } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { FolderKanban, TrendingUp, Coins } from "lucide-react";
 import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import StatsCard from "@/components/dashboard/StatsCard";
+import AttentionPanel from "@/components/dashboard/AttentionPanel";
 import ProjectsTable from "@/components/dashboard/ProjectsTable";
 import OnboardingModal from "@/components/dashboard/OnboardingModal";
+import NewProjectSheet from "@/components/dashboard/NewProjectSheet";
 
 const Dashboard = () => {
   const [showOnboarding, setShowOnboarding] = useState(true);
+  const [showNewProject, setShowNewProject] = useState(false);
 
   return (
     <div className="min-h-screen bg-background">
-      <DashboardSidebar />
+      <DashboardSidebar onNewProject={() => setShowNewProject(true)} />
       
       {/* Main Content */}
-      <main className="ml-64 min-h-screen">
+      <main className="lg:ml-60 min-h-screen pt-14 lg:pt-0">
         {/* Header */}
-        <header className="h-16 border-b border-border flex items-center justify-between px-8">
-          <h1 className="text-xl font-display font-semibold text-foreground">Dashboard</h1>
-          <Button>
-            <Plus className="h-4 w-4 mr-2" />
-            New Project
-          </Button>
+        <header className="h-14 border-b border-border flex items-center px-6">
+          <div>
+            <h1 className="text-lg font-display font-semibold text-foreground">Dashboard</h1>
+            <p className="text-xs text-muted-foreground">Track compliance results and start new checks.</p>
+          </div>
         </header>
 
-        {/* Content */}
-        <div className="p-8 space-y-8">
-          {/* Stats Row */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <StatsCard 
-              title="Active Projects" 
-              value={12} 
-            />
-            <StatsCard 
-              title="Compliance Rate" 
-              value="85%" 
-            />
-            <StatsCard 
-              title="Credits Remaining" 
-              value="3 / 5" 
-              subtitle="Resets in 7 days"
-            />
-          </div>
+        {/* Content - Bento Grid */}
+        <div className="p-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+            {/* Stats Row */}
+            <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <StatsCard 
+                title="Active Projects" 
+                value={12}
+                icon={FolderKanban}
+                trend={{ value: "2 this week", positive: true }}
+              />
+              <StatsCard 
+                title="Compliance Rate" 
+                value="85%"
+                icon={TrendingUp}
+                trend={{ value: "5%", positive: true }}
+              />
+              <StatsCard 
+                title="Credits Remaining" 
+                value="3 / 5"
+                icon={Coins}
+                subtitle="Resets in 7 days"
+              />
+            </div>
 
-          {/* Projects Table */}
-          <div>
-            <h2 className="text-lg font-display font-semibold text-foreground mb-4">Recent Projects</h2>
-            <ProjectsTable />
+            {/* Attention Panel */}
+            <div className="lg:col-span-4 lg:row-span-2">
+              <AttentionPanel />
+            </div>
+
+            {/* Projects Table */}
+            <div className="lg:col-span-8">
+              <div className="mb-3">
+                <h2 className="text-sm font-semibold text-foreground">Recent Projects</h2>
+              </div>
+              <ProjectsTable onNewProject={() => setShowNewProject(true)} />
+            </div>
           </div>
         </div>
       </main>
 
-      {/* Onboarding Modal */}
+      {/* Modals */}
       <OnboardingModal open={showOnboarding} onOpenChange={setShowOnboarding} />
+      <NewProjectSheet open={showNewProject} onOpenChange={setShowNewProject} />
     </div>
   );
 };

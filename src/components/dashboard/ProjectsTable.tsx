@@ -1,6 +1,7 @@
-import { MoreHorizontal } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { useState, useEffect } from "react";
+import { MoreHorizontal, Search, Upload } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -15,122 +16,140 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
+
+type ProjectStatus = "compliant" | "issues" | "processing";
 
 interface Project {
   id: string;
   name: string;
   city: string;
-  status: "compliant" | "issues" | "processing";
+  status: ProjectStatus;
   date: string;
 }
 
 const mockProjects: Project[] = [
-  { id: "1", name: "Downtown Office Tower", city: "Austin, TX", status: "compliant", date: "Dec 20, 2024" },
-  { id: "2", name: "Residential Complex A", city: "Houston, TX", status: "issues", date: "Dec 18, 2024" },
-  { id: "3", name: "Retail Center Phase 2", city: "Austin, TX", status: "processing", date: "Dec 17, 2024" },
-  { id: "4", name: "Industrial Warehouse", city: "Dallas, TX", status: "compliant", date: "Dec 15, 2024" },
-  { id: "5", name: "Mixed-Use Development", city: "Austin, TX", status: "compliant", date: "Dec 12, 2024" },
+  { id: "1", name: "1204 Elm St", city: "Austin", status: "compliant", date: "Dec 20, 2024" },
+  { id: "2", name: "789 Oak Ave", city: "Houston", status: "issues", date: "Dec 19, 2024" },
+  { id: "3", name: "456 Pine Rd", city: "Dallas", status: "processing", date: "Dec 18, 2024" },
+  { id: "4", name: "321 Maple Ln", city: "Austin", status: "compliant", date: "Dec 17, 2024" },
+  { id: "5", name: "567 Cedar Blvd", city: "San Antonio", status: "issues", date: "Dec 16, 2024" },
 ];
 
 const statusConfig = {
-  compliant: {
-    label: "Compliant",
-    className: "bg-success/10 text-success border-success/20 hover:bg-success/10",
-  },
-  issues: {
-    label: "Issues Found",
-    className: "bg-error/10 text-error border-error/20 hover:bg-error/10",
-  },
-  processing: {
-    label: "Processing",
-    className: "bg-warning/10 text-warning border-warning/20 hover:bg-warning/10",
-  },
+  compliant: { label: "Compliant", dotClass: "bg-success" },
+  issues: { label: "Issues Found", dotClass: "bg-error" },
+  processing: { label: "Processing", dotClass: "bg-warning animate-pulse" },
 };
 
 interface ProjectsTableProps {
-  projects?: Project[];
-  isLoading?: boolean;
+  onNewProject?: () => void;
 }
 
-const ProjectsTable = ({ projects = mockProjects, isLoading = false }: ProjectsTableProps) => {
-  if (isLoading) {
+const ProjectsTable = ({ onNewProject }: ProjectsTableProps) => {
+  const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState<string>("all");
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const filteredProjects = mockProjects.filter((project) => {
+    const matchesSearch = project.name.toLowerCase().includes(search.toLowerCase());
+    const matchesStatus = statusFilter === "all" || project.status === statusFilter;
+    return matchesSearch && matchesStatus;
+  });
+
+  if (loading) {
     return (
-      <div className="bg-card border border-border rounded-xl overflow-hidden">
-        <Table>
-          <TableHeader>
-            <TableRow className="hover:bg-transparent">
-              <TableHead className="font-medium">Project Name</TableHead>
-              <TableHead className="font-medium">City</TableHead>
-              <TableHead className="font-medium">Status</TableHead>
-              <TableHead className="font-medium">Date</TableHead>
-              <TableHead className="w-12"></TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {[1, 2, 3].map((i) => (
-              <TableRow key={i}>
-                <TableCell><div className="h-4 w-48 bg-secondary rounded animate-pulse" /></TableCell>
-                <TableCell><div className="h-4 w-24 bg-secondary rounded animate-pulse" /></TableCell>
-                <TableCell><div className="h-6 w-20 bg-secondary rounded-full animate-pulse" /></TableCell>
-                <TableCell><div className="h-4 w-28 bg-secondary rounded animate-pulse" /></TableCell>
-                <TableCell><div className="h-8 w-8 bg-secondary rounded animate-pulse" /></TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+      <div className="bg-card border border-border rounded-lg">
+        <div className="p-4 border-b border-border">
+          <div className="flex gap-3">
+            <Skeleton className="h-9 flex-1 max-w-xs" />
+            <Skeleton className="h-9 w-32" />
+          </div>
+        </div>
+        <div className="p-4 space-y-3">
+          {[...Array(5)].map((_, i) => (
+            <Skeleton key={i} className="h-12 w-full" />
+          ))}
+        </div>
       </div>
     );
   }
 
-  if (projects.length === 0) {
+  if (mockProjects.length === 0) {
     return (
-      <div className="border-2 border-dashed border-border rounded-xl p-12 text-center">
-        <p className="text-muted-foreground mb-4">
-          No projects yet. Upload a blueprint to get started.
-        </p>
-        <Button>Upload Blueprint</Button>
+      <div className="bg-card border border-dashed border-border rounded-lg p-12 text-center">
+        <div className="mx-auto w-12 h-12 rounded-full bg-muted flex items-center justify-center mb-4">
+          <Upload className="h-6 w-6 text-muted-foreground" />
+        </div>
+        <h3 className="text-sm font-semibold text-foreground mb-1">No projects yet</h3>
+        <p className="text-sm text-muted-foreground mb-4">Upload a blueprint to get started.</p>
+        <Button onClick={onNewProject}>Upload Blueprint</Button>
       </div>
     );
   }
 
   return (
-    <div className="bg-card border border-border rounded-xl overflow-hidden">
+    <div className="bg-card border border-border rounded-lg">
+      <div className="p-3 border-b border-border">
+        <div className="flex gap-3">
+          <div className="relative flex-1 max-w-xs">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input placeholder="Search..." value={search} onChange={(e) => setSearch(e.target.value)} className="pl-9 h-9 text-sm" />
+          </div>
+          <Select value={statusFilter} onValueChange={setStatusFilter}>
+            <SelectTrigger className="w-36 h-9 text-sm"><SelectValue placeholder="Status" /></SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Status</SelectItem>
+              <SelectItem value="compliant">Compliant</SelectItem>
+              <SelectItem value="issues">Issues Found</SelectItem>
+              <SelectItem value="processing">Processing</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+      </div>
       <Table>
         <TableHeader>
           <TableRow className="hover:bg-transparent">
-            <TableHead className="font-medium">Project Name</TableHead>
-            <TableHead className="font-medium">City</TableHead>
-            <TableHead className="font-medium">Status</TableHead>
-            <TableHead className="font-medium">Date</TableHead>
-            <TableHead className="w-12"></TableHead>
+            <TableHead className="text-xs font-medium text-muted-foreground">Project</TableHead>
+            <TableHead className="text-xs font-medium text-muted-foreground">City</TableHead>
+            <TableHead className="text-xs font-medium text-muted-foreground">Status</TableHead>
+            <TableHead className="text-xs font-medium text-muted-foreground">Uploaded</TableHead>
+            <TableHead className="w-10"></TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {projects.map((project) => (
-            <TableRow key={project.id}>
-              <TableCell className="font-medium text-foreground">{project.name}</TableCell>
-              <TableCell className="text-muted-foreground">{project.city}</TableCell>
-              <TableCell>
-                <Badge 
-                  variant="outline" 
-                  className={cn("font-medium", statusConfig[project.status].className)}
-                >
-                  {statusConfig[project.status].label}
-                </Badge>
+          {filteredProjects.map((project) => (
+            <TableRow key={project.id} className="hover:bg-muted/50">
+              <TableCell className="font-medium text-sm py-3">{project.name}</TableCell>
+              <TableCell className="text-sm text-muted-foreground py-3">{project.city}</TableCell>
+              <TableCell className="py-3">
+                <div className="flex items-center gap-2">
+                  <div className={cn("w-2 h-2 rounded-full", statusConfig[project.status].dotClass)} />
+                  <span className="text-sm">{statusConfig[project.status].label}</span>
+                </div>
               </TableCell>
-              <TableCell className="text-muted-foreground">{project.date}</TableCell>
-              <TableCell>
+              <TableCell className="text-sm text-muted-foreground py-3">{project.date}</TableCell>
+              <TableCell className="py-3">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="icon" className="h-8 w-8">
-                      <MoreHorizontal className="h-4 w-4" />
-                    </Button>
+                    <Button variant="ghost" size="icon" className="h-8 w-8"><MoreHorizontal className="h-4 w-4" /></Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="bg-popover">
+                  <DropdownMenuContent align="end" className="w-40">
                     <DropdownMenuItem>View Details</DropdownMenuItem>
                     <DropdownMenuItem>Download Report</DropdownMenuItem>
-                    <DropdownMenuItem>Re-analyze</DropdownMenuItem>
                     <DropdownMenuItem className="text-destructive">Delete</DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
