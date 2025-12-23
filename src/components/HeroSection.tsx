@@ -1,192 +1,139 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Play, CheckCircle, AlertTriangle, XCircle } from "lucide-react";
+import { ArrowRight, AlertCircle, CheckCircle, XCircle } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { cn } from "@/lib/utils";
 
 const HeroSection = () => {
-  const { ref: badgeRef, isVisible: badgeVisible } = useScrollAnimation();
-  const { ref: headlineRef, isVisible: headlineVisible } = useScrollAnimation();
-  const { ref: subRef, isVisible: subVisible } = useScrollAnimation();
-  const { ref: ctaRef, isVisible: ctaVisible } = useScrollAnimation();
-  const { ref: proofRef, isVisible: proofVisible } = useScrollAnimation();
-  const { ref: dashboardRef, isVisible: dashboardVisible } = useScrollAnimation();
+  const { ref: contentRef, isVisible: contentVisible } = useScrollAnimation();
+  const { ref: mockupRef, isVisible: mockupVisible } = useScrollAnimation();
 
   return (
-    <section className="relative min-h-screen overflow-hidden section-dark">
-      {/* Background layers */}
-      <div className="absolute inset-0 bg-gradient-to-b from-dark-bg via-dark-bg to-dark-card" />
-      <div className="absolute inset-0 grid-pattern opacity-30" />
-      <div className="absolute inset-0 mesh-gradient" />
-      
-      {/* Floating orbs */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[120px] animate-pulse-glow" />
-      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-purple-500/15 rounded-full blur-[100px]" />
-      
-      <div className="relative section-padding pt-28 sm:pt-36 lg:pt-44">
+    <section className="relative min-h-screen overflow-hidden bg-background">
+      <div className="relative section-padding pt-28 sm:pt-36 lg:pt-40">
         <div className="container-wide">
-          <div className="max-w-4xl mx-auto text-center">
-            {/* Badge */}
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Left - Content */}
             <div 
-              ref={badgeRef}
+              ref={contentRef}
               className={cn(
-                "inline-flex items-center gap-2 px-4 py-2 rounded-full glass-dark mb-8 transition-all duration-700",
-                badgeVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                "transition-all duration-700",
+                contentVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               )}
             >
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-success"></span>
-              </span>
-              <span className="text-sm text-white/80">Now checking permits in 12+ cities</span>
+              {/* Badge */}
+              <div className="badge-accent mb-6">
+                <AlertCircle className="h-4 w-4" />
+                <span>Stop the rejection cycle</span>
+              </div>
+
+              {/* Headline */}
+              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-[1.1] mb-6">
+                Still filing permits like it's{" "}
+                <span className="text-accent underline decoration-wavy decoration-accent/30 underline-offset-4">1999?</span>
+              </h1>
+
+              {/* Subheadline */}
+              <p className="text-lg text-muted-foreground mb-8 max-w-lg leading-relaxed">
+                Stop guessing if your blueprints will pass. Check zoning compliance before the city rejects you—saving months and thousands in redesigns.
+              </p>
+
+              {/* CTAs */}
+              <div className="flex flex-col sm:flex-row gap-4 mb-6">
+                <Button size="xl" className="group">
+                  Check Your Compliance
+                  <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </Button>
+                <Button variant="outline" size="xl">
+                  See How It Works
+                </Button>
+              </div>
+
+              <p className="text-sm text-muted-foreground">
+                No stamps required. Results in minutes.
+              </p>
             </div>
 
-            {/* Headline */}
-            <h1 
-              ref={headlineRef}
-              className={cn(
-                "font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.1] mb-6 transition-all duration-700 delay-100",
-                headlineVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-              )}
-            >
-              <span className="text-white">Check building permit compliance</span>
-              <br />
-              <span className="text-gradient">before the city does</span>
-            </h1>
-
-            {/* Subheadline */}
-            <p 
-              ref={subRef}
-              className={cn(
-                "text-lg sm:text-xl text-white/60 mb-10 max-w-2xl mx-auto leading-relaxed transition-all duration-700 delay-200",
-                subVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-              )}
-            >
-              Upload your blueprints, select your city, and get an instant compliance report. 
-              Catch zoning issues and code violations before they become costly rejections.
-            </p>
-
-            {/* CTAs */}
+            {/* Right - Creative Mockup */}
             <div 
-              ref={ctaRef}
+              ref={mockupRef}
               className={cn(
-                "flex flex-col sm:flex-row gap-4 justify-center mb-12 transition-all duration-700 delay-300",
-                ctaVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+                "relative transition-all duration-700 delay-200",
+                mockupVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               )}
             >
-              <Button variant="glow" size="xl" className="group">
-                Check Your Permit Compliance
-                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </Button>
-              <Button variant="glass" size="xl">
-                <Play className="h-4 w-4" />
-                See How It Works
-              </Button>
-            </div>
-
-            {/* Social proof hint */}
-            <p 
-              ref={proofRef}
-              className={cn(
-                "text-sm text-white/40 transition-all duration-700 delay-400",
-                proofVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-              )}
-            >
-              Trusted by architects and developers in California, Texas, and Florida
-            </p>
-          </div>
-
-          {/* Dashboard Preview */}
-          <div 
-            ref={dashboardRef}
-            className={cn(
-              "mt-16 lg:mt-24 max-w-5xl mx-auto transition-all duration-1000 delay-500",
-              dashboardVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
-            )}
-          >
-            <div className="relative">
-              {/* Glow effect */}
-              <div className="absolute -inset-4 bg-gradient-to-r from-primary/30 via-purple-500/20 to-primary/30 rounded-3xl blur-3xl opacity-60" />
-              
-              {/* Browser chrome */}
-              <div className="relative glass-dark rounded-2xl overflow-hidden border border-white/10 shadow-2xl animate-float" style={{ animationDuration: '8s' }}>
-                {/* Browser header */}
-                <div className="bg-dark-card/80 px-4 py-3 border-b border-white/5 flex items-center gap-3">
-                  <div className="flex gap-2">
-                    <div className="w-3 h-3 rounded-full bg-error/80" />
-                    <div className="w-3 h-3 rounded-full bg-warning/80" />
-                    <div className="w-3 h-3 rounded-full bg-success/80" />
+              {/* Rejected permit form mockup */}
+              <div className="relative">
+                {/* Main paper */}
+                <div className="paper-mockup rounded-lg p-6 sm:p-8 transform rotate-[-2deg] animate-float">
+                  {/* Header */}
+                  <div className="border-b-2 border-dashed border-amber-800/20 pb-4 mb-4">
+                    <p className="text-xs text-amber-800/60 uppercase tracking-wider mb-1">Department of Bureaucratic Delays</p>
+                    <h3 className="font-display font-bold text-xl text-amber-900">PERMIT APPLICATION</h3>
+                    <p className="text-xs text-amber-800/50 font-mono">Form 1040-WAIT • Rev. 1998</p>
                   </div>
-                  <div className="flex-1 mx-4">
-                    <div className="h-7 bg-white/5 rounded-lg max-w-md mx-auto flex items-center justify-center px-4">
-                      <span className="text-xs text-white/40">app.permitshark.com/compliance-check</span>
+
+                  {/* Form fields */}
+                  <div className="space-y-3 mb-6">
+                    <div>
+                      <label className="text-xs font-medium text-amber-800/60 uppercase">1. Project Address</label>
+                      <div className="h-8 bg-amber-100/50 rounded border border-amber-800/10 mt-1 flex items-center px-2">
+                        <span className="text-sm text-amber-900/70 font-mono">1847 Oak Street, SF</span>
+                      </div>
                     </div>
+                    <div>
+                      <label className="text-xs font-medium text-amber-800/60 uppercase">2. Rear Setback (ft)</label>
+                      <div className="h-8 bg-amber-100/50 rounded border border-amber-800/10 mt-1 flex items-center px-2">
+                        <span className="text-sm text-amber-900/70 font-mono">8 ft</span>
+                        <span className="ml-2 text-xs text-error font-medium">(requires 10 ft)</span>
+                      </div>
+                    </div>
+                    <div>
+                      <label className="text-xs font-medium text-amber-800/60 uppercase">3. Estimated Review Time</label>
+                      <div className="h-8 bg-amber-100/50 rounded border border-amber-800/10 mt-1 flex items-center px-2">
+                        <span className="text-sm text-amber-900/70 font-mono">3-6 months (maybe longer)</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Stamp */}
+                  <div className="absolute top-8 right-8 stamp px-4 py-2 rounded text-lg">
+                    REJECTED
+                  </div>
+
+                  {/* Footer notice */}
+                  <div className="border-t border-dashed border-amber-800/20 pt-3 mt-4">
+                    <p className="text-[10px] text-amber-800/40 italic">
+                      Paperwork Reduction Act Notice: We estimate this will take 400 hours of your time.
+                    </p>
                   </div>
                 </div>
-                
-                {/* Dashboard content */}
-                <div className="p-6 lg:p-8 bg-gradient-to-b from-dark-card to-dark-bg">
-                  <div className="grid lg:grid-cols-3 gap-6">
-                    {/* Left panel - Upload area */}
-                    <div className="lg:col-span-1 space-y-4">
-                      <div className="p-6 border border-dashed border-white/20 rounded-xl bg-white/5 text-center hover:border-primary/50 hover:bg-primary/5 transition-all duration-300 cursor-pointer group">
-                        <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-purple-500/20 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
-                          <svg className="w-7 h-7 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                          </svg>
-                        </div>
-                        <p className="text-sm font-medium text-white">Drop blueprint PDF here</p>
-                        <p className="text-xs text-white/40 mt-1">or click to browse</p>
-                      </div>
-                      
-                      <div className="p-4 bg-white/5 rounded-xl border border-white/10">
-                        <label className="text-sm font-medium text-white/80 block mb-2">Select City</label>
-                        <div className="h-10 bg-white/5 rounded-lg border border-white/10 flex items-center px-3">
-                          <span className="text-sm text-white/60">San Francisco, CA</span>
-                        </div>
-                      </div>
-                    </div>
 
-                    {/* Right panel - Results preview */}
-                    <div className="lg:col-span-2">
-                      <div className="bg-white/5 rounded-xl p-6 border border-white/10">
-                        <div className="flex items-center justify-between mb-5">
-                          <h3 className="font-display font-semibold text-white">Compliance Summary</h3>
-                          <span className="px-3 py-1 rounded-full bg-warning/20 text-warning text-xs font-medium border border-warning/30">2 Issues</span>
-                        </div>
-                        
-                        <div className="space-y-3">
-                          <div className="flex items-center justify-between p-3 bg-success/10 border border-success/20 rounded-lg">
-                            <div className="flex items-center gap-3">
-                              <CheckCircle className="h-5 w-5 text-success" />
-                              <span className="text-sm text-white">Front Setback</span>
-                            </div>
-                            <span className="text-xs text-success font-medium">Compliant</span>
-                          </div>
-                          <div className="flex items-center justify-between p-3 bg-success/10 border border-success/20 rounded-lg">
-                            <div className="flex items-center gap-3">
-                              <CheckCircle className="h-5 w-5 text-success" />
-                              <span className="text-sm text-white">Height Limit</span>
-                            </div>
-                            <span className="text-xs text-success font-medium">Compliant</span>
-                          </div>
-                          <div className="flex items-center justify-between p-3 bg-error/10 border border-error/20 rounded-lg">
-                            <div className="flex items-center gap-3">
-                              <XCircle className="h-5 w-5 text-error" />
-                              <span className="text-sm text-white">Rear Setback</span>
-                            </div>
-                            <span className="text-xs text-error font-medium">Violation</span>
-                          </div>
-                          <div className="flex items-center justify-between p-3 bg-warning/10 border border-warning/20 rounded-lg">
-                            <div className="flex items-center gap-3">
-                              <AlertTriangle className="h-5 w-5 text-warning" />
-                              <span className="text-sm text-white">Window Egress</span>
-                            </div>
-                            <span className="text-xs text-warning font-medium">Warning</span>
-                          </div>
-                        </div>
-                      </div>
+                {/* Floating approval card - modern alternative */}
+                <div className="absolute -bottom-4 -right-4 sm:bottom-4 sm:-right-8 bg-background rounded-xl border border-border shadow-xl p-4 max-w-[200px] transform rotate-[3deg]">
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="w-8 h-8 rounded-lg bg-success/10 flex items-center justify-center">
+                      <CheckCircle className="h-5 w-5 text-success" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-muted-foreground">With Permit Shark</p>
+                      <p className="text-sm font-semibold text-foreground">Pre-Checked</p>
                     </div>
                   </div>
+                  <div className="space-y-1.5">
+                    <div className="flex items-center gap-2 text-xs">
+                      <CheckCircle className="h-3 w-3 text-success" />
+                      <span className="text-muted-foreground">Front setback</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-xs">
+                      <XCircle className="h-3 w-3 text-error" />
+                      <span className="text-foreground font-medium">Rear setback</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-xs">
+                      <CheckCircle className="h-3 w-3 text-success" />
+                      <span className="text-muted-foreground">Height limit</span>
+                    </div>
+                  </div>
+                  <p className="text-[10px] text-accent font-medium mt-3">Fix before submission →</p>
                 </div>
               </div>
             </div>

@@ -1,84 +1,61 @@
-import { Clock, FileX, DollarSign, AlertCircle, TrendingDown } from "lucide-react";
+import { Clock, FileX, DollarSign, RotateCcw } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 
 const ProblemSection = () => {
-  const stats = [
-    { value: "3-6", label: "months average wait", suffix: "" },
-    { value: "$15K", label: "avg. redesign cost", suffix: "+" },
-    { value: "40%", label: "rejection rate", suffix: "" },
-  ];
-
   const problems = [
     {
       icon: Clock,
-      title: "Months of waiting",
-      description: "Cities take 3-6 months to review permits. A rejection means starting over.",
+      stat: "3-6 mo",
+      title: "Average wait time",
+      description: "Cities take months to review permits. One rejection means starting the clock over.",
     },
     {
       icon: FileX,
-      title: "Manual compliance checks",
-      description: "Architects spend hours cross-referencing zoning codes. Human error is inevitable.",
-    },
-    {
-      icon: AlertCircle,
-      title: "Small mistakes, big delays",
-      description: "One missed setback, wrong window size, or parking miscalculation can sink your timeline.",
+      stat: "40%",
+      title: "Rejection rate",
+      description: "Nearly half of residential permits get rejected on first submission.",
     },
     {
       icon: DollarSign,
-      title: "Costly redesigns",
-      description: "Permit rejections mean expensive revisions, contractor delays, and lost opportunity.",
+      stat: "$15K+",
+      title: "Redesign costs",
+      description: "Each rejection means architect fees, contractor delays, and lost opportunities.",
+    },
+    {
+      icon: RotateCcw,
+      stat: "∞",
+      title: "Frustration loops",
+      description: "Submit. Wait. Reject. Revise. Repeat. It doesn't have to be this way.",
     },
   ];
 
   return (
-    <section className="section-padding section-dark relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-dark-card to-dark-bg" />
-      <div className="absolute inset-0 grid-pattern opacity-20" />
-      
-      {/* Red/orange accent glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-gradient-to-b from-error/10 to-transparent blur-[100px]" />
-      
-      <div className="relative container-wide">
-        {/* Stats row */}
-        <div className="grid sm:grid-cols-3 gap-6 mb-16">
-          {stats.map((stat, index) => (
-            <AnimatedSection key={index} delay={index * 100}>
-              <div className="text-center p-6 rounded-2xl bg-white/5 border border-white/10">
-                <div className="font-display text-4xl sm:text-5xl font-bold text-gradient-accent mb-2">
-                  {stat.value}{stat.suffix}
-                </div>
-                <div className="text-white/60 text-sm">{stat.label}</div>
-              </div>
-            </AnimatedSection>
-          ))}
-        </div>
-
+    <section className="section-padding bg-secondary/50">
+      <div className="container-wide">
         <AnimatedSection className="text-center mb-12">
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-error/10 border border-error/20 text-error font-semibold text-sm uppercase tracking-wider mb-4">
-            <TrendingDown className="h-4 w-4" />
-            The Problem
-          </span>
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white mt-3 mb-4">
-            Permit Approval is Broken
+          <p className="text-accent font-semibold text-sm uppercase tracking-wider mb-3">The Problem</p>
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+            The permit process is stuck in the past
           </h2>
-          <p className="text-white/60 text-lg max-w-2xl mx-auto">
-            The traditional permit process is slow, opaque, and punishes small mistakes with massive delays.
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            Manual reviews, vague requirements, and endless back-and-forth. You deserve better.
           </p>
         </AnimatedSection>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {problems.map((problem, index) => (
             <AnimatedSection key={problem.title} delay={index * 100}>
-              <div className="group p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-error/30 hover:bg-error/5 transition-all duration-300 h-full">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-error/20 to-orange-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <problem.icon className="h-6 w-6 text-error" />
+              <div className="group bg-background rounded-2xl p-6 border border-border hover:border-accent/30 transition-all duration-300 h-full">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                    <problem.icon className="h-5 w-5 text-accent" />
+                  </div>
+                  <span className="font-display text-2xl font-bold text-foreground">{problem.stat}</span>
                 </div>
-                <h3 className="font-display text-lg font-semibold text-white mb-2">
+                <h3 className="font-display text-lg font-semibold text-foreground mb-2">
                   {problem.title}
                 </h3>
-                <p className="text-white/50 text-sm leading-relaxed">
+                <p className="text-muted-foreground text-sm leading-relaxed">
                   {problem.description}
                 </p>
               </div>

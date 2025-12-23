@@ -5,66 +5,52 @@ const BenefitsSection = () => {
   const benefits = [
     {
       icon: Shield,
-      title: "Catch issues before submission",
-      description: "Identify zoning violations and code conflicts before the city sees them.",
-      featured: true,
+      title: "Catch issues early",
+      description: "Find violations before the city does—when they're cheap to fix.",
     },
     {
       icon: Clock,
-      title: "Reduce approval time",
-      description: "Clean submissions get approved faster. Avoid the back-and-forth.",
+      title: "Save months",
+      description: "Clean submissions get approved faster. Skip the rejection loop.",
     },
     {
       icon: DollarSign,
-      title: "Save redesign costs",
-      description: "Fixing problems on paper is cheaper than fixing them in review.",
+      title: "Cut redesign costs",
+      description: "Fixing on paper costs nothing. Fixing after rejection costs thousands.",
     },
     {
       icon: Target,
-      title: "Real zoning rules",
-      description: "Built on actual city codes, not generic checklists.",
+      title: "Real city codes",
+      description: "We use actual municipal zoning data, not generic templates.",
     },
     {
       icon: Building,
       title: "Residential focus",
-      description: "Optimized for ADUs, single-family, and multi-unit residential projects.",
+      description: "Built for ADUs, single-family, and multi-unit projects.",
     },
     {
       icon: CheckCircle,
-      title: "Clear, actionable reports",
-      description: "Know exactly what's wrong and how to fix it.",
+      title: "Clear guidance",
+      description: "Every issue comes with a specific, actionable fix.",
     },
   ];
 
   return (
-    <section className="section-padding bg-background relative overflow-hidden">
-      {/* Mesh gradient background */}
-      <div className="absolute inset-0 mesh-gradient opacity-30" />
-      
-      <div className="relative container-wide">
+    <section className="section-padding bg-background" id="features">
+      <div className="container-wide">
         <AnimatedSection className="text-center mb-12">
-          <span className="text-primary font-semibold text-sm uppercase tracking-wider">Benefits</span>
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mt-3 mb-4">
-            Why Teams Choose Permit Shark
+          <p className="text-accent font-semibold text-sm uppercase tracking-wider mb-3">Benefits</p>
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+            Why teams switch to Permit Shark
           </h2>
         </AnimatedSection>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {benefits.map((benefit, index) => (
             <AnimatedSection key={benefit.title} delay={index * 80}>
-              <div 
-                className={`group p-6 rounded-2xl border transition-all duration-300 h-full ${
-                  benefit.featured 
-                    ? "bg-gradient-to-br from-primary/5 to-purple-500/5 border-primary/20 hover:border-primary/40 hover:shadow-glow" 
-                    : "bg-card border-border hover:border-primary/20 hover:shadow-lg"
-                }`}
-              >
-                <div className={`flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform ${
-                  benefit.featured 
-                    ? "bg-gradient-to-br from-primary to-purple-500 text-white shadow-glow" 
-                    : "bg-gradient-to-br from-primary/10 to-purple-500/10"
-                }`}>
-                  <benefit.icon className={`h-6 w-6 ${benefit.featured ? "text-white" : "text-primary"}`} />
+              <div className="group p-6 rounded-2xl border border-border hover:border-accent/30 bg-background transition-all duration-300 h-full">
+                <div className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center mb-4 group-hover:bg-accent/10 transition-colors">
+                  <benefit.icon className="h-6 w-6 text-foreground group-hover:text-accent transition-colors" />
                 </div>
                 <h3 className="font-display text-lg font-semibold text-foreground mb-2">
                   {benefit.title}
