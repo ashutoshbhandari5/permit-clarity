@@ -110,19 +110,6 @@ const HeroSection = () => {
                   </div>
                 </div>
 
-                {/* Floating rejected version behind - cleaner styling */}
-                <div className="absolute -bottom-3 -left-3 sm:-bottom-4 sm:-left-6 w-2/3 bg-gradient-to-br from-amber-100/80 to-orange-100/80 rounded-xl p-3 shadow-md transform rotate-3 -z-10 border border-amber-200/50">
-                  <div className="flex items-center gap-2 mb-2">
-                    <div className="w-6 h-6 rounded-lg bg-amber-200 flex items-center justify-center">
-                      <XCircle className="h-3 w-3 text-amber-700" />
-                    </div>
-                    <p className="text-[10px] font-medium text-amber-800">Old Permit</p>
-                  </div>
-                  <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-error/10 border border-error/30">
-                    <XCircle className="h-3 w-3 text-error" />
-                    <span className="text-[10px] font-bold text-error uppercase tracking-wide">Rejected</span>
-                  </div>
-                </div>
 
                 {/* Scroll indicator */}
                 <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center text-muted-foreground">
