@@ -1,4 +1,5 @@
 import { Shield, Clock, DollarSign, Target, Building, CheckCircle } from "lucide-react";
+import AnimatedSection from "@/components/AnimatedSection";
 
 const BenefitsSection = () => {
   const benefits = [
@@ -41,37 +42,38 @@ const BenefitsSection = () => {
       <div className="absolute inset-0 mesh-gradient opacity-30" />
       
       <div className="relative container-wide">
-        <div className="text-center mb-12 opacity-0 animate-fade-up">
+        <AnimatedSection className="text-center mb-12">
           <span className="text-primary font-semibold text-sm uppercase tracking-wider">Benefits</span>
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mt-3 mb-4">
             Why Teams Choose Permit Shark
           </h2>
-        </div>
+        </AnimatedSection>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {benefits.map((benefit, index) => (
-            <div 
-              key={benefit.title} 
-              className={`group p-6 rounded-2xl border transition-all duration-300 opacity-0 animate-fade-up stagger-${(index % 4) + 1} ${
-                benefit.featured 
-                  ? "bg-gradient-to-br from-primary/5 to-purple-500/5 border-primary/20 hover:border-primary/40 hover:shadow-glow" 
-                  : "bg-card border-border hover:border-primary/20 hover:shadow-lg"
-              }`}
-            >
-              <div className={`flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform ${
-                benefit.featured 
-                  ? "bg-gradient-to-br from-primary to-purple-500 text-white shadow-glow" 
-                  : "bg-gradient-to-br from-primary/10 to-purple-500/10"
-              }`}>
-                <benefit.icon className={`h-6 w-6 ${benefit.featured ? "text-white" : "text-primary"}`} />
+            <AnimatedSection key={benefit.title} delay={index * 80}>
+              <div 
+                className={`group p-6 rounded-2xl border transition-all duration-300 h-full ${
+                  benefit.featured 
+                    ? "bg-gradient-to-br from-primary/5 to-purple-500/5 border-primary/20 hover:border-primary/40 hover:shadow-glow" 
+                    : "bg-card border-border hover:border-primary/20 hover:shadow-lg"
+                }`}
+              >
+                <div className={`flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform ${
+                  benefit.featured 
+                    ? "bg-gradient-to-br from-primary to-purple-500 text-white shadow-glow" 
+                    : "bg-gradient-to-br from-primary/10 to-purple-500/10"
+                }`}>
+                  <benefit.icon className={`h-6 w-6 ${benefit.featured ? "text-white" : "text-primary"}`} />
+                </div>
+                <h3 className="font-display text-lg font-semibold text-foreground mb-2">
+                  {benefit.title}
+                </h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  {benefit.description}
+                </p>
               </div>
-              <h3 className="font-display text-lg font-semibold text-foreground mb-2">
-                {benefit.title}
-              </h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                {benefit.description}
-              </p>
-            </div>
+            </AnimatedSection>
           ))}
         </div>
       </div>

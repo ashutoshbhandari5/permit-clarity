@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle, Sparkles } from "lucide-react";
+import AnimatedSection from "@/components/AnimatedSection";
 
 const CTASection = () => {
   return (
@@ -16,7 +17,7 @@ const CTASection = () => {
       <div className="absolute inset-0 grid-pattern opacity-10" />
       
       <div className="relative container-narrow text-center">
-        <div className="opacity-0 animate-fade-up">
+        <AnimatedSection>
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-8">
             <Sparkles className="h-4 w-4 text-white" />
@@ -53,7 +54,7 @@ const CTASection = () => {
               <CheckCircle className="h-4 w-4" /> Cancel anytime
             </span>
           </div>
-        </div>
+        </AnimatedSection>
       </div>
     </section>
   );
