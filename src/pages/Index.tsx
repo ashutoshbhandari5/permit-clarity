@@ -2,7 +2,6 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import PermitShowcase from "@/components/PermitShowcase";
 import ProblemSection from "@/components/ProblemSection";
-import HowItWorks from "@/components/HowItWorks";
 import ComplianceReportPreview from "@/components/ComplianceReportPreview";
 import BenefitsSection from "@/components/BenefitsSection";
 import WhoItsFor from "@/components/WhoItsFor";
@@ -17,7 +16,6 @@ const Index = () => {
       <HeroSection />
       <PermitShowcase />
       <ProblemSection />
-      <HowItWorks />
       <ComplianceReportPreview />
       <BenefitsSection />
       <WhoItsFor />
