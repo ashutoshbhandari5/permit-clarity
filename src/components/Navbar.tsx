@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 
@@ -76,11 +77,11 @@ const Navbar = () => {
 
           {/* Desktop CTAs */}
           <div className="hidden md:flex items-center gap-3">
-            <Button variant="ghost" size="sm">
-              Log In
+            <Button variant="ghost" size="sm" asChild>
+              <Link to="/sign-in">Log In</Link>
             </Button>
-            <Button size="sm">
-              Get Started
+            <Button size="sm" asChild>
+              <Link to="/dashboard">Get Started</Link>
             </Button>
           </div>
 
@@ -113,11 +114,11 @@ const Navbar = () => {
                 </a>
               ))}
               <div className="pt-4 space-y-3">
-                <Button variant="outline" className="w-full">
-                  Log In
+                <Button variant="outline" className="w-full" asChild>
+                  <Link to="/sign-in">Log In</Link>
                 </Button>
-                <Button className="w-full">
-                  Get Started
+                <Button className="w-full" asChild>
+                  <Link to="/dashboard">Get Started</Link>
                 </Button>
               </div>
             </div>
