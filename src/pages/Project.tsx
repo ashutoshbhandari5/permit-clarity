@@ -3,13 +3,23 @@ import { useNavigate } from "react-router-dom";
 import { ArrowLeft, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
-import LogStream, { LogEntry, LogStatus } from "@/components/project/LogStream";
+import LogStream, { LogEntry, LogStatus, ViewMode } from "@/components/project/LogStream";
 import FileUploadZone from "@/components/project/FileUploadZone";
 import AuditChecklist, { CheckItem, CheckStatus } from "@/components/project/AuditChecklist";
 import ChatInput from "@/components/project/ChatInput";
 import { cn } from "@/lib/utils";
 
 type AuditState = "upload" | "processing" | "complete";
+
+// Violation markers for PDF visualization
+const VIOLATION_MARKERS = [
+  {
+    id: "impervious",
+    label: "Driveway Area: 127 sq ft",
+    detail: "(Excess - 3% over limit)",
+    position: { x: 38, y: 500, width: 128, height: 64 },
+  },
+];
 
 // Simulation data
 const INITIAL_CHECKS: CheckItem[] = [
@@ -71,10 +81,13 @@ const Project = () => {
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
   const [progress, setProgress] = useState(0);
   const [fileName, setFileName] = useState<string>("");
+  const [viewMode, setViewMode] = useState<ViewMode>("terminal");
+  const [activeViolation, setActiveViolation] = useState<string | null>(null);
 
   const handleFileSelect = useCallback((file: File) => {
     setFileName(file.name);
     setAuditState("processing");
+    setViewMode("terminal"); // Ensure terminal view during processing
     startSimulation();
   }, []);
 
@@ -114,6 +127,8 @@ const Project = () => {
         if (index === SIMULATION_LOGS.length - 1) {
           setTimeout(() => {
             setAuditState("complete");
+            setViewMode("visual"); // Auto-switch to visual proof when done
+            setActiveViolation("impervious"); // Highlight the violation
           }, 500);
         }
       }, item.delay);
@@ -124,6 +139,11 @@ const Project = () => {
     console.log("Chat message:", message);
     // Future: integrate with AI chat
   };
+
+  const handleViolationClick = useCallback((itemId: string) => {
+    setViewMode("visual");
+    setActiveViolation(itemId);
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">
@@ -173,6 +193,7 @@ const Project = () => {
                     items={checks}
                     progress={progress}
                     expandedItems={expandedItems}
+                    onItemClick={handleViolationClick}
                   />
                 </div>
 
@@ -184,9 +205,16 @@ const Project = () => {
             )}
           </div>
 
-          {/* Right Panel - Logs */}
+          {/* Right Panel - Logs/Visual */}
           <div className="hidden lg:flex w-1/2 max-w-xl flex-col">
-            <LogStream logs={logs} />
+            <LogStream 
+              logs={logs}
+              viewMode={viewMode}
+              onViewModeChange={setViewMode}
+              fileName={fileName}
+              activeViolation={activeViolation}
+              violations={VIOLATION_MARKERS}
+            />
           </div>
         </div>
       </main>

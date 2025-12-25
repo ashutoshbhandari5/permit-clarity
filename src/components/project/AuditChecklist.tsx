@@ -24,6 +24,7 @@ interface AuditChecklistProps {
   items: CheckItem[];
   progress: number;
   expandedItems: string[];
+  onItemClick?: (itemId: string) => void;
 }
 
 const statusConfig = {
@@ -53,7 +54,7 @@ const statusConfig = {
   },
 };
 
-const AuditChecklist = ({ items, progress, expandedItems }: AuditChecklistProps) => {
+const AuditChecklist = ({ items, progress, expandedItems, onItemClick }: AuditChecklistProps) => {
   return (
     <div className="space-y-4">
       {/* Progress Header */}
@@ -75,6 +76,7 @@ const AuditChecklist = ({ items, progress, expandedItems }: AuditChecklistProps)
         {items.map((item) => {
           const config = statusConfig[item.status];
           const Icon = config.icon;
+          const isClickable = item.status === "fail" && onItemClick;
 
           return (
             <AccordionItem
@@ -82,11 +84,12 @@ const AuditChecklist = ({ items, progress, expandedItems }: AuditChecklistProps)
               value={item.id}
               className={cn(
                 "border rounded-lg overflow-hidden transition-colors",
-                item.status === "fail" && "border-rose-200 dark:border-rose-800 bg-rose-50/50 dark:bg-rose-950/30",
+                item.status === "fail" && "border-rose-200 dark:border-rose-800 bg-rose-50/50 dark:bg-rose-950/30 cursor-pointer",
                 item.status === "pass" && "border-emerald-200 dark:border-emerald-800 bg-emerald-50/50 dark:bg-emerald-950/30",
                 item.status === "processing" && "border-blue-200 dark:border-blue-800 bg-blue-50/50 dark:bg-blue-950/30",
                 item.status === "pending" && "border-border bg-card"
               )}
+              onClick={() => isClickable && onItemClick(item.id)}
             >
               <AccordionTrigger className="px-4 py-3 hover:no-underline">
                 <div className="flex items-center gap-3 w-full">
