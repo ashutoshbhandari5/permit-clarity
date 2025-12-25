@@ -121,10 +121,10 @@ const SidebarContent = ({ onNewProject, isDark, onToggleTheme }: SidebarContentP
 };
 
 interface DashboardSidebarProps {
-  onNewProject: () => void;
+  onNewProject?: () => void;
 }
 
-const DashboardSidebar = ({ onNewProject }: DashboardSidebarProps) => {
+const DashboardSidebar = ({ onNewProject = () => {} }: DashboardSidebarProps) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isDark, setIsDark] = useState(false);
 
